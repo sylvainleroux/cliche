@@ -46,7 +46,7 @@ public class Example implements ShellDependent {
 
         // You can use Input Converters to support named constants
         new InputConverter() {
-            public Integer convertInput(String original, Class toClass) throws Exception {
+            public Integer convertInput(String original, Class<?> toClass) throws Exception {
                 if (toClass.equals(Integer.class)) {
                     if (original.equals("one")) return 1;
                     if (original.equals("two")) return 2;

@@ -205,7 +205,7 @@ public class HelpCommandHandler implements ShellDependent {
                 command.getDescription()));
         if (command.getArity() > 0) {
             sb.append(String.format("Number of parameters: %d\n", command.getArity()));
-            Class[] paramTypes = command.getMethod().getParameterTypes();
+            Class<?>[] paramTypes = command.getMethod().getParameterTypes();
             ShellCommandParamSpec[] paramSpecs = command.getParamSpecs();
             if (paramSpecs != null) {
                 for (int i = 0; i < paramTypes.length; i++) {

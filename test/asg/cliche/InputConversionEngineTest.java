@@ -39,7 +39,7 @@ public class InputConversionEngineTest {
             "12.6",
             "true",
         };
-        Class[] classes = {
+        Class<?>[] classes = {
             String.class,
             Object.class,
             Integer.class,
@@ -67,7 +67,7 @@ public class InputConversionEngineTest {
     private static final int MAGIC_INT = 234;
 
     private static final InputConverter testInputConverter = new InputConverter() {
-        public Object convertInput(String original, Class toClass) throws Exception {
+        public Object convertInput(String original, Class<?> toClass) throws Exception {
             if (toClass.equals(Integer.class)) {
                 return MAGIC_INT; // no matter what was the text, for test purposes
             } else {

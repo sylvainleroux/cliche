@@ -11,6 +11,7 @@ package asg.cliche;
  *
  * @author ASG
  */
+@SuppressWarnings("serial")
 public class TokenException extends CLIException {
     private Token token;
 

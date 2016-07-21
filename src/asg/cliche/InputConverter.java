@@ -21,5 +21,5 @@ public interface InputConverter {
      *
      * @see asg.cliche.Shell
      */
-    Object convertInput(String original, Class toClass) throws Exception;
+    Object convertInput(String original, Class<?> toClass) throws Exception;
 }

@@ -132,7 +132,7 @@ public class ConsoleIO implements Input, Output, ShellManageable {
                 output(Array.get(obj, i), 0, oce);
             }
         } else if (obj instanceof Collection) {
-            for (Object elem : (Collection)obj) {
+            for (Object elem : (Collection<?>)obj) {
                 output(elem, 0, oce);
             }
         } else {
@@ -165,7 +165,7 @@ public class ConsoleIO implements Input, Output, ShellManageable {
             }
         } else if (obj instanceof Collection) {
             println("Collection");
-            for (Object elem : (Collection)obj) {
+            for (Object elem : (Collection<?>)obj) {
                 output(elem, indent + 1, oce);
             }
         } else if (obj instanceof Throwable) {

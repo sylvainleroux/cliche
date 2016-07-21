@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 public class ShellCommandParamSpec {
 
     static ShellCommandParamSpec[] forMethod(Method theMethod) {
-        Class[] paramTypes = theMethod.getParameterTypes();
+        Class<?>[] paramTypes = theMethod.getParameterTypes();
         ShellCommandParamSpec[] result = new ShellCommandParamSpec[theMethod.getParameterTypes().length];
         Annotation[][] annotations = theMethod.getParameterAnnotations();
         assert annotations.length == result.length;
@@ -36,9 +36,9 @@ public class ShellCommandParamSpec {
     private String name;
     private String description;
     private int position;
-    private Class valueClass;
+    private Class<?> valueClass;
 
-    public Class getValueClass() {
+    public Class<?> getValueClass() {
         return valueClass;
     }
 
@@ -54,7 +54,7 @@ public class ShellCommandParamSpec {
         return position;
     }
 
-    public ShellCommandParamSpec(String name, Class valueClass, String description, int position) {
+    public ShellCommandParamSpec(String name, Class<?> valueClass, String description, int position) {
         super();
         this.name = name;
         this.description = description;

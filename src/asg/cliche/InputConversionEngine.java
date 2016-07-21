@@ -8,8 +8,8 @@ package asg.cliche;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This thing is responsible for converting strings to objects.
@@ -37,7 +37,7 @@ public class InputConversionEngine {
         return inputConverters.remove(converter);
     }
 
-    public Object convertInput(String string, Class aClass) throws Exception {
+    public Object convertInput(String string, Class<?> aClass) throws Exception {
         for (InputConverter currentConverter : inputConverters ){
             Object conversionResult = currentConverter.convertInput(string, aClass);
             if (conversionResult != null) {
@@ -52,7 +52,7 @@ public class InputConversionEngine {
         return convertArgToElementaryType(string, aClass);
     }
 
-    public final Object[] convertToParameters(List<Token> tokens, Class[] paramClasses, boolean isVarArgs)
+    public final Object[] convertToParameters(List<Token> tokens, Class<?>[] paramClasses, boolean isVarArgs)
             throws TokenException {
 
         assert isVarArgs || paramClasses.length == tokens.size()-1;
@@ -69,9 +69,9 @@ public class InputConversionEngine {
         }
         int lastIndex = paramClasses.length-1;
         if (isVarArgs) {
-            Class varClass = paramClasses[lastIndex];
+            Class<?> varClass = paramClasses[lastIndex];
             assert varClass.isArray();
-            Class elemClass = varClass.getComponentType();
+            Class<?> elemClass = varClass.getComponentType();
             Object theArray = Array.newInstance(elemClass, tokens.size() - paramClasses.length);
             for (int i = 0; i < Array.getLength(theArray); i++) {
                 try {
@@ -101,7 +101,7 @@ public class InputConversionEngine {
     }
 
 
-    private static Object convertArgToElementaryType(String string, Class aClass) throws CLIException {
+    private static Object convertArgToElementaryType(String string, Class<?> aClass) throws CLIException {
         if (aClass.equals(String.class) || aClass.isInstance(string)) {
             return string;
         } else if (aClass.equals(Integer.class) || aClass.equals(Integer.TYPE)) {
@@ -116,7 +116,7 @@ public class InputConversionEngine {
             return Boolean.parseBoolean(string);
         } else {
             try {
-                Constructor c = aClass.getConstructor(String.class);
+                Constructor<?> c = aClass.getConstructor(String.class);
                 try {
                     return c.newInstance(string);
                 } catch (Exception ex) {

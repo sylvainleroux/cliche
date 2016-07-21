@@ -41,7 +41,7 @@ public class Shell {
         private final MultiMap<String, Object> auxHandlers;
         private final boolean displayTime;
 
-        public Settings(Input input, Output output, MultiMap auxHandlers, boolean displayTime) {
+        public Settings(Input input, Output output, MultiMap<String, Object> auxHandlers, boolean displayTime) {
             this.input = input;
             this.output = output;
             this.auxHandlers = auxHandlers;
@@ -284,7 +284,7 @@ public class Shell {
 
         ShellCommand commandToInvoke = commandTable.lookupCommand(discriminator, tokens);
 
-        Class[] paramClasses = commandToInvoke.getMethod().getParameterTypes();
+        Class<?>[] paramClasses = commandToInvoke.getMethod().getParameterTypes();
         Object[] parameters = inputConverter.convertToParameters(tokens, paramClasses,
                 commandToInvoke.getMethod().isVarArgs());
 

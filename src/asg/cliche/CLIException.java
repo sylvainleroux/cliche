@@ -11,6 +11,7 @@ package asg.cliche;
  *
  * @author ASG
  */
+@SuppressWarnings("serial")
 public class CLIException extends Exception {
     public CLIException() {
         super();
